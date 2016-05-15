@@ -1,4 +1,22 @@
 package project;
+
+
+/*
+ * @author Ahmed Mustafa<a01119443408@gmail.com>
+ * 
+ * @
+ * @Since 2016-5-15
+ * */
+
+/*
+ * The calc class
+ * 
+ * the calc class take an expression from the user
+ * and handle it to get the value of it using some methods
+ * 
+ * */
+
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,13 +31,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class calc extends Application   {
+	/* creating the stage that work in the window*/
 	Stage window;
 	
-	//Scene s1;
-public static GenericStack<Character> operatorStack=new GenericStack<Character>();
+	
+	public static GenericStack<Character> operatorStack=new GenericStack<Character>();
+	/*//to Operate operation
+	//the method take a string represents the operator 
+	//It take the two numbers and perform the operation to them 
+	//Return the result of the calculation*/
 
-	public static String text="";
-	//////////////////to Operate operation
 	public static double operation(String operator,double op1,double op2)
 	{
 		double result=0.0;
@@ -33,39 +54,27 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		
 		if (operator.equals("*")){ result=op1*op2;}
 
-		if (operator.equals("/")){ result=op1/op2;}
-/*
-		if (operator.equals("/")){ 
-			
-		
-			result=Math.sqrt(op1);}
-	*/		 
+		if (operator.equals("/")){ result=op1/op2;}	 
 		
 		return result;
 	}
-	public static double sqr(double op){
-		
-		return Math.sqrt(op);
-	}
-	
 	////////////////
 	
-	/////////////////////// to check priorty
+	/*// to check priority of the operator*/
 	public static boolean  k(char o)
 	{
-		return( (o=='+'&&(operatorStack.peek()=='-'||operatorStack.peek()=='*'||operatorStack.peek()=='/'||operatorStack.peek()=='%'||operatorStack.peek()=='^'))
-				||(o=='-'&&(operatorStack.peek()=='^'||operatorStack.peek()=='+'||operatorStack.peek()=='*'||operatorStack.peek()=='/'||operatorStack.peek()=='%'))
+		return( (o=='+'&&(operatorStack.peek()=='-'||operatorStack.peek()=='*'||operatorStack.peek()=='/'||operatorStack.peek()=='%'||operatorStack.peek()=='^'||operatorStack.peek()=='+'))
+				||(o=='-'&&(operatorStack.peek()=='^'||operatorStack.peek()=='+'||operatorStack.peek()=='*'||operatorStack.peek()=='/'||operatorStack.peek()=='%'||operatorStack.peek()=='-'))
 				||(o=='*'&&operatorStack.peek()=='^'||operatorStack.peek()=='/'||operatorStack.peek()=='%')
 				||(o=='/'&&operatorStack.peek()=='^'||operatorStack.peek()=='*')||operatorStack.peek()=='%')
 				||(o=='%'&&(operatorStack.peek()=='^'||operatorStack.peek()=='%'));
 	}
 	
-	/////////////////
-	
-	//////////////////////////// to convert from infix to post fix
+	/*// to convert an array of character from infix to postfix*/
 	public static GenericStack<String> infix_to_postfix(char[] infix)
 	{
 		String temp="";
+		/*//to crate a postfix expression and save each number and operator individually*/
 		GenericStack<String> postStack=new GenericStack<String>();
 		
 		for(int i=0;i<infix.length;i++)
@@ -125,7 +134,7 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 	}
 	//////////////////
 	
-	///////////////////////// to evaluate the postfix
+	/*//to evaluate the postfix and display the result*/
 	public static double Evaluate_Postfix (GenericStack<String> post)
 	{
 		GenericStack<Double> resultStack = new GenericStack<>();
@@ -146,7 +155,7 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 				
 			}
 			
-			else if((post.peek().equals("^")||post.peek().equals("%"))||(post.peek().equals("+")||post.peek().equals("-")||post.peek().equals("*")||post.peek().equals("/")||post.peek().equals("د€")))
+			else if((post.peek().equals("^")||post.peek().equals("%"))||(post.peek().equals("+")||post.peek().equals("-")||post.peek().equals("*")||post.peek().equals("/")||post.peek().equals("ط¯â‚¬")))
 			{
 				double key=0;
 				Operator=post.pop();
@@ -164,7 +173,8 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		
 		return resultStack.peek();
 	}
-///////////////////////
+	/*// to operate the to functions infix_to _postfix and reverse the stack then operate the Evaluate_postfix
+	//then return the result*/
 	public static String conversion(char[]g)
 	{
 		
@@ -180,7 +190,15 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		return result;
 	}
 	@Override
-	
+	//the start method 
+	/*
+	 * implement the application scene
+	 * and set the handle of each Button
+	 * implement the binding property
+	 * 
+	 * 
+	 * 
+	 * */
 	public void start(Stage stage) throws
 	
 		Exception{
@@ -196,7 +214,7 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		
 		double[] ans= new double[1];
 
-				////////////////////////////////////// Buttons & their handling methods
+				/*Buttons & their handling methods*/
 		Button buttonZero = new Button("0");//button 0
 		buttonZero.setOnAction(new EventHandler<ActionEvent>()//handling method
 		{
@@ -209,9 +227,10 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 			String s= (text.getText()+"0");
 		text.setText(s);}});
 		////////////////////////////////////////	1
-		Button buttonOne = new Button("1");//button 1
-		
-		buttonOne.setOnAction(new EventHandler<ActionEvent>()//handling method
+                /*//button 1*/
+		Button buttonOne = new Button("1");
+		/*//handling method*/
+		buttonOne.setOnAction(new EventHandler<ActionEvent>()
 		{
 			@Override
 			public void handle(ActionEvent e)
@@ -354,7 +373,9 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 				text.setText(text.getText()+"~");
 				}}});
 		
-		////////////////////////////////////////		////////////////////////////////////////	-
+		//////////
+		
+		//////////////////////////////		////////////////////////////////////////	-
 		Button buttonSub = new Button("-");
 		buttonSub.setOnAction(new EventHandler<ActionEvent>()
 		{
@@ -395,7 +416,7 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 				text.setText(text.getText()+"^2");}//End if
 			}});
 		////////////////////////////////////////		////////////////////////////////////////
-		Button buttonrot = new Button("^½");
+		Button buttonrot = new Button("^آ½");
 		buttonrot.setOnAction(new EventHandler<ActionEvent>()
 		{@Override
 			public void handle(ActionEvent e)
@@ -456,6 +477,10 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 				{
 					
 				String t=	conversion(s.toCharArray());
+				if(t.contains("-"))
+				{
+					t.replace('-', '~');
+				}
 				text.setText(t);
 				ans[0]=Double.valueOf(t);
 				} catch (Exception e1) {
@@ -538,8 +563,6 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		  buttonSub.setStyle("-fx-font-size:12;-fx-background-color:rgb(30,30,30);-fx-text-fill: white");
 		  buttonPow.setStyle("-fx-font-size:12;-fx-background-color:rgb(30,30,30);-fx-text-fill: white");
 		  buttonZero.setStyle("-fx-font-size:12;-fx-background-color:rgb(30,30,30);-fx-text-fill: white");
-		  
-		  
 		  
 		  
 		  GridPane pane = new GridPane();
@@ -665,7 +688,7 @@ public static GenericStack<Character> operatorStack=new GenericStack<Character>(
 		  window.show();
 		  }//end of the start method
 	
-	
+	/*// main method*/
 	public static void main(String[] args) {
 		launch(args);
 	}
